@@ -1,0 +1,13 @@
+using System;
+class Program
+{
+    static void Main()
+    {
+        double valorFuturo = 7390.61;
+        double taxaJuros = 0.12;
+        int periodoAnos = 2;
+        double valorPresente = valorFuturo / Math.Pow(1 + taxaJuros, periodoAnos);
+        Console.WriteLine($"Valor Futuro (VF): R$ {valorFuturo:F2}");
+        Console.WriteLine($"Valor Presente Calculado (VP): R$ {valorPresente:F2}");
+    }
+}
