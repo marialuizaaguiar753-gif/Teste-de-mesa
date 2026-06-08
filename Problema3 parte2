@@ -1,0 +1,15 @@
+using System;
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Digite o Valor Presente: ");
+        double valorPresente = Convert.ToDouble(Console.ReadLine());
+        Console.Write("Digite a Taxa de Juros (em %): ");
+        double taxaJuros = Convert.ToDouble(Console.ReadLine()) / 100;
+        Console.Write("Digite o Período (anos): ");
+        int periodoAnos = Convert.ToInt32(Console.ReadLine());
+        double rendimentoCalculado = valorPresente * Math.Pow(1 + taxaJuros, periodoAnos);
+        Console.WriteLine($"\nResultado (Valor Futuro): R$ {rendimentoCalculado:F2}");
+    }
+}
