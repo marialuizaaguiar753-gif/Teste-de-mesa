@@ -1,0 +1,14 @@
+using System;
+int[] v = new int[6];
+int a = 7;
+int b = a - 6;
+while (b < a)
+{
+    v[b] = b + a;
+    b = b + 2;
+}
+Console.WriteLine(v[0]);
+Console.WriteLine(v[1]);
+Console.WriteLine(v[2]);
+Console.WriteLine(v[3]);
+Console.WriteLine(v[4]);
