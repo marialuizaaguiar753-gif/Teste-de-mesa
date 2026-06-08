@@ -1,0 +1,28 @@
+class Program
+{
+    static void Main()
+    {
+        double saldo = 2000.00;
+        double taxa = 0.02;
+        int totalMeses = 6;
+        Console.WriteLine("Mês | Saldo Inicial | Rendimento (2%) | Saldo Final");
+        Console.WriteLine("---------------------------------------------------");
+        for (int mes = 1; mes <= totalMeses; mes++)
+        {
+            double saldoInicial = saldo;
+            double rendimento = saldoInicial * taxa;
+            saldo = saldoInicial + rendimento;
+            if (mes == 5)
+            {
+                Console.WriteLine($"{mes}   | R$ {saldoInicial:F2}     | R$ {rendimento:F2}        | R$ {saldo:F2} (Antes do Resgate)");
+                saldo = saldo - 1000.00;
+                Console.WriteLine($"--- | RESGATE DE R$ 1.000,00 REALIZADO! Novo Saldo: R$ {saldo:F2} ---");
+            }
+            else
+            {
+                Console.WriteLine($"{mes}   | R$ {saldoInicial:F2}     | R$ {rendimento:F2}        | R$ {saldo:F2}");
+            }
+        }
+        Console.WriteLine($"\nSaldo Final Pós Resgate (Fim do 6º mês): R$ {saldo:F2}");
+    }
+}
