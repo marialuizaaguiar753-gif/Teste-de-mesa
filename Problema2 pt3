@@ -1,0 +1,46 @@
+using System;
+namespace Problema7App
+{
+    class InvestimentoComResgate
+    {
+        public double ValorPresente { get; set; }
+        public double TaxaJuros { get; set; }
+
+        public InvestimentoComResgate(double valorPresente, double taxaJurosPerc)
+        {
+            ValorPresente = valorPresente;
+            TaxaJuros = taxaJurosPerc / 100; 
+        }
+        public void SimularMeses()
+        {
+            double saldo = ValorPresente;
+            double resgate = 0;
+            double rendimentoNoMes5 = 0;
+            for (int mes = 1; mes <= 8; mes++)
+            {
+                double rendimento = saldo * TaxaJuros;
+                saldo += rendimento;
+                if (mes == 5)
+                {
+                    rendimentoNoMes5 = rendimento;
+                    resgate = rendimento; 
+                    saldo -= resgate;     
+                }
+            }
+            Console.WriteLine($"Valor Presente Investido: R$ {ValorPresente:F2}");
+            Console.WriteLine($"Taxa de Juros: {TaxaJuros * 100}%");
+            Console.WriteLine($"Número Períodos: 8 meses e 10 dias");
+            Console.WriteLine($"Resgate do Rendimento (no 5º mês): R$ {resgate:F2}");
+            Console.WriteLine($"Saldo Líquido Restante (no 5º mês após saque): R$ {ValorPresente:F2}"); 
+            Console.WriteLine($"Rendimento Restante (Rendimento do 5º mês): R$ {rendimentoNoMes5:F2}");
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            InvestimentoComResgate simulacao = new InvestimentoComResgate(1000.00, 3.0);
+            simulacao.SimularMeses();
+        }
+    }
+}
