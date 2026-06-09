@@ -1,0 +1,40 @@
+using System;
+namespace Problema6App
+{
+    class Investimento
+    {
+                public double ValorPresente { get; set; }
+        public double TaxaJuros { get; set; }
+        public double PeriodoMeses { get; set; }
+        public Investimento(double valorPresente, double taxaJurosPerc, int meses, int dias)
+        {
+            ValorPresente = valorPresente;
+            TaxaJuros = taxaJurosPerc / 100;
+            PeriodoMeses = meses + (dias / 30.0); 
+        }
+        public double CalcularValorFuturo()
+        {
+            return ValorPresente * Math.Pow(1 + TaxaJuros, PeriodoMeses);
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine("--- CADASTRO DE INVESTIMENTO (POO) ---");
+            Console.Write("Digite o Valor Presente: ");
+            double vp = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Digite a Taxa de Juros (em %): ");
+            double taxa = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Digite a quantidade de meses: ");
+            int meses = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Digite a quantidade de dias extras: ");
+            int dias = Convert.ToInt32(Console.ReadLine());
+            Investimento meuInvestimento = new Investimento(vp, taxa, meses, dias);
+            double valorFuturo = meuInvestimento.CalcularValorFuturo();
+            Console.WriteLine("\n--- RESULTADO ---");
+            Console.WriteLine($"Período convertido em meses: {meuInvestimento.PeriodoMeses:F3} meses");
+            Console.WriteLine($"Rendimento Futuro total: R$ {valorFuturo:F2}");
+        }
+    }
+}
