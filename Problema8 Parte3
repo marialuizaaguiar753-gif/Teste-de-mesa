@@ -1,0 +1,79 @@
+using System;
+namespace Problema8App
+{
+    {
+        public int Mes { get; set; }
+        public double ValorInvestido { get; set; }
+        public double TaxaJuros { get; set; }
+        public double Rendimento { get; set; }
+        public double Resgate { get; set; }
+        public double SaldoLiquido { get; set; }
+
+        public LinhaTabela(int mes, double valorInvestido, double taxaJuros, double rendimento, double resgate, double saldoLiquido)
+        {
+            Mes = mes;
+            ValorInvestido = valorInvestido;
+            TaxaJuros = taxaJuros;
+            Rendimento = rendimento;
+            Resgate = resgate;
+            SaldoLiquido = saldoLiquido;
+        }
+        {
+            Console.WriteLine($"{Mes,-5} | R$ {ValorInvestido,-13:F2} | {TaxaJuros * 100,-11:F2}% | R$ {Rendimento,-11:F2} | R$ {Resgate,-8:F2} | R$ {SaldoLiquido,-13:F2}");
+        }
+    }
+    class SimuladorInvestimento
+    {
+        public double ValorInicial { get; set; }
+        public double TaxaJurosPerc { get; set; }
+        public int TotalMeses { get; set; }
+
+        public SimuladorInvestimento(double valorInicial, double taxaJurosPerc, int totalMeses)
+        {
+            ValorInicial = valorInicial;
+            TaxaJurosPerc = taxaJurosPerc;
+            TotalMeses = totalMeses;
+        }
+
+        public void GerarEExibirTabela()
+        {
+            double saldoAtual = ValorInicial;
+            double taxaDecimal = TaxaJurosPerc / 100;
+            Console.WriteLine("\n==");
+            Console.WriteLine("Mês   | Valor Investido | Taxa de Juros | Rendimento  | Resgate  | Saldo Líquido  ");
+            Console.WriteLine("===");
+
+            for (int mes = 1; mes <= TotalMeses; mes++)
+            {
+                double valorInicialDoMes = saldoAtual;
+                double rendimento = valorInicialDoMes * taxaDecimal;
+                saldoAtual += rendimento; // Saldo com o rendimento somado
+                
+                double resgateEfetuado = 0;
+                if (mes == 5)
+                {
+                    resgateEfetuado = rendimento;
+                    saldoAtual -= resgateEfetuado; 
+                }
+                LinhaTabela linha = new LinhaTabela(mes, valorInicialDoMes, taxaDecimal, rendimento, resgateEfetuado, saldoAtual);
+                linha.ExibirLinha();
+            }
+            Console.WriteLine("");
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine("SIMULADOR DE INVESTIMENTO COM TABELA (POO)");
+            Console.Write("Digite o Valor Investido Inicial (Ex: 1000): ");
+            double valor = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Digite a Taxa de Juros em % (Ex: 3): ");
+            double taxa = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Digite o Período total em meses (Ex: 8): ");
+            int meses = Convert.ToInt32(Console.ReadLine());
+            SimuladorInvestimento simulacao = new SimuladorInvestimento(valor, taxa, meses);
+            simulacao.GerarEExibirTabela();
+        }
+    }
+}
